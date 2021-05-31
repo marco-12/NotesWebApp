@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+
+
+<div class="card">
+	<nav th:fragment="folders">
+		<h3>Cartelle</h3>
+		<hr class="hr">
+
+		<div th:each="folder : ${folders}" class="mb-3" 
+		style="display: inline-flex;padding: 0; margin: 0;width: 100%;"> 
+			<div style="width: 10%;">
+				<span class="panel-icon"> 
+						<img style="margin-top: 5px" src="../static/images/folder.png" width="20"
+						th:src="@{images/folder.png}" />
+				</span> 
+			</div>
+			<div style="width: 80%;">
+		    	<div style="position: relative;">
+					<p class="ellipsis" style="margin-bottom: 0" th:text="${folder.name}"></p>
+				</div>
+			</div>
+			
+			<div style="width: 10%;">
+				<span style="display: inline-block; float: right;">
+					<form method="post" action="/folders/delete">
+						<input type="hidden" name="folderId" th:value="${folder.id}">
+						<button style="background: transparent; border: none;padding: 0;">
+								<!-- <i class="fas fa-trash" aria-hidden="true"></i> -->
+							<img class="btn-delete-folder" src="../static/images/delete.png"
+								width="20" th:src="@{images/delete.png}" />
+						</button>
+					</form>
+				</span>
+			</div>
+		</div>
+	</nav>
+	</div>
+
+</body>
+
+</html>

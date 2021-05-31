@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello Bulma!</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+</head>
+<body>
+
+	<div style="background-color: black;">
+
+
+		<a href="/home"> <img src="../static/images/Notes.png" width="88"
+			height="88" th:src="@{../images/Notes.png}" />
+		</a>
+
+	</div>
+
+	<div style="background-color: #262626;">
+
+
+		<section class="section">
+
+			<div class="columns">
+
+				<div class="column is-one">
+				
+				<form method="post" th:action="@{/edit}" th:object="${note}">
+				<input type="hidden" th:field="*{id}" /> 
+
+			<div class="field">
+					<label class="label" style="color: white;">Titolo</label>
+					<div class="control">
+						<input class="input" th:field="*{title}" type="text" placeholder="Titolo della nota">
+					</div>
+				</div>
+					<div class="field">
+						<label class="label" style="color: white;">Testo della nota</label>
+						<div class="control">
+							<textarea class="textarea" th:field="*{body}" placeholder="Testo della nota"></textarea>
+						</div>
+					</div>
+
+					
+					<div class="field">
+					<div class="control">
+						<button class="button is-link is-info">Salva</button>
+					</div>
+					</div>
+					
+					<div class="field">
+					<div class="control">
+						<a href="/home" class="button is-light">Torna indietro</a>
+					</div>
+					</div>
+
+
+			</form>
+			
+					
+				</div>
+			</div>
+
+
+		</section>
+	</div>
+</body>
+</html>
