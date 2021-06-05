@@ -1,5 +1,7 @@
 package com.ms.noteswebapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ms.noteswebapp.FolderRepository;
 import com.ms.noteswebapp.NoteRepository;
+import com.ms.noteswebapp.NoteService;
 import com.ms.noteswebapp.models.Folder;
 import com.ms.noteswebapp.models.Note;
 
@@ -24,6 +27,9 @@ public class NoteController {
 	
 	@Autowired
 	NoteRepository noteRepository;
+	
+	@Autowired
+	NoteService noteService;
 	
 	@GetMapping("/notes/create")
 	public String creareNoteform(Model model) {
@@ -62,6 +68,14 @@ public class NoteController {
 		noteRepository.deleteById(noteId);
 		model.addAttribute("notes", noteRepository.findAll()); 
 		return "redirect:/home";
+	}
+	
+	@GetMapping("/search")
+	public ModelAndView search(@RequestParam String keyword) {
+		List<Note> searchedNotes = noteService.search(keyword);
+		ModelAndView mav = new ModelAndView("searchNotes");
+		mav.addObject("searchedNotes", searchedNotes);
+		return mav;
 	}
 
 }
